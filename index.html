@@ -16,23 +16,23 @@
             color: rgb(205, 205, 205); /* Define a cor do texto como branco */
             font-family: Arial, sans-serif; /* Define a fonte do texto */
             display: flex; /* Usa Flexbox para o layout */
-            justify-content: center; /* Centraliza horizontalmente */
-            align-items: flex-start; /* Alinha ao topo verticalmente */
+            justify-content: stretch; /* Centraliza horizontalmente */
+            align-items: stretch; /* Alinha ao topo verticalmente */
             min-height: 100vh; /* Define altura mínima igual à altura da janela */
             margin: 0; /* Remove as margens padrão */
-            padding-top: 2px; /* Adiciona um espaçamento superior */
+            padding-top: 0px; /* Adiciona um espaçamento superior */
         }
 
         /* Estiliza o container principal */
         .container {
             width: 100%; /* Ocupar toda a largura disponível */
-            max-width: 250px; /* Limita a largura máxima a 800px */
-            margin: 2px auto; /* Centraliza horizontalmente e adiciona margem vertical */
-            padding: 2px; /* Adiciona espaçamento interno */
-            background: linear-gradient(to top, #010d24 80%, #2f0381); /* Aplica gradiente no fundo */
-            border-radius: 18px; /* Adiciona bordas arredondadas */
+            max-width: 850px; /* Limita a largura máxima a 800px */
+            margin: 0px auto; /* Centraliza horizontalmente e adiciona margem vertical */
+            padding: 0px; /* Adiciona espaçamento interno */
+            /*background: linear-gradient(to top, #010d24 80%, #2f0381); /* Aplica gradiente no fundo */
+            border-radius: 0px; /* Adiciona bordas arredondadas */
             /*box-shadow: 0px 0px 50px rgb(61, 61, 94); /* Adiciona sombra ao container */
-            border: 1px solid #545454; /* Define a borda externa */
+            border: 0px solid #545454; /* Define a borda externa */
         }
         .links {
             display: flex; /* Usa Flexbox para layout */
@@ -47,13 +47,13 @@
         /* Estiliza a exibição do BPM */
         .bpm-display {
             display: flex;
-            background: #00000000; /* Fundo escuro */
+            background: #535531; /* Fundo escuro */
             padding: 0px; /* Espaçamento interno */
-            border-radius: 15px; /* Bordas arredondadas */
+            border-radius: 0px; /* Bordas arredondadas */
             justify-content: center; /* Espaçamento entre os itens */
             align-items: center; /* Centraliza verticalmente os itens */
             /*border: 2px solid #4d6084; /* Borda azul */
-            font-size: 1.0rem; /* Fonte grande para o BPM */
+            font-size: 3.0rem; /* Fonte grande para o BPM */
             font-weight: 900;
             /* width: 90%; */
             white-space: nowrap; /* Impede quebra de linha */
@@ -62,15 +62,17 @@
         /* Estilização responsiva para telas menores */
         /* Estiliza os controles */
         .controls {
-            background: linear-gradient(0deg, #000000 70%, #e4e2e854 ); /* Aplica gradiente no fundo */
+            /*background: linear-gradient(0deg, #000000 70%, #e4e2e854 ); /* Aplica gradiente no fundo */
             display: flex; /* Usa Flexbox para layout */
             justify-content: center; /* Centraliza horizontalmente os elementos */
             align-items: center; /* Centraliza verticalmente os elementos */
             gap: 5px; /* Espaçamento entre os elementos */
             margin: 10px 0; /* Adiciona margens vertical */
             /* border-radius: 58px; Adiciona bordas arredondadas */
-            border-radius: 15px;
+            padding: 20px;
+            border-radius: 0px;
             border: 0px solid #000000;
+            
             /*box-shadow: 1px 5px 19px rgba(22, 22, 209, 0.917); /* Adiciona sombra ao container */
             /* flex-wrap: wrap; Permite que os itens quebrem para uma nova linha */
         }
@@ -88,15 +90,19 @@
 
         /* Estiliza os botões */
         button {
-            background: linear-gradient(-10deg, #040b34 60%, #e4e2e88b ); /* Aplica gradiente no fundo */
+            background: #3f4252 ; /* Aplica gradiente no fundo */
             color: white; /* Cor do texto branco */
-            padding: 10px; /* Espaçamento interno */
+            padding: 20px; /* Espaçamento interno */
             cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
             transition: 0.3s; /* Adiciona transição suave ao hover */
             border-radius: 15px;
             border: 0px groove #545454;
             /*box-shadow: 1px 5px 10px rgba(136, 136, 153, 0.459); /* Adiciona sombra ao container */
             width: 50%;
+            min-height: 40px;
+            margin-right: 5px;
+            margin-left: 5px;
+            
         }
 
         /* Efeito hover nos botões */
@@ -107,15 +113,19 @@
         }
 
         .button1 {
-            background: linear-gradient(-10deg, #3549ba 40%, #e4e2e88b ); /* Aplica gradiente no fundo */
+            background:  #453e54 ; /* Aplica gradiente no fundo */
             color: white; /* Cor do texto branco */
-            padding: 1px; /* Espaçamento interno */
+            padding: 0px; /* Espaçamento interno */
             cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
             transition: 0.3s; /* Adiciona transição suave ao hover */
-            border-radius: 10px;
-            border: 1px groove #1d193000;
-            box-shadow: 0px 0px 3px rgba(24, 24, 163, 0.768); /* Adiciona sombra ao container */
+            border-radius: 8px;
+            border: 0px groove #1d193000;
+            /*box-shadow: 0px 0px 3px rgba(24, 24, 163, 0.768); /* Adiciona sombra ao container */
             /* width: 50%; */
+            margin: 5px;
+            height: 40px;
+            font-weight: 900;            
+            text-align: center;
         }
 
         /* Efeito hover nos botões */
@@ -206,9 +216,24 @@
             margin: 0; /* Remove margens desnecessárias */
             white-space: nowrap; /* Impede quebra de linha */
             color: rgb(205, 205, 205); /* Define a cor do texto como branco */
+            font-size: 1.2rem; /* Define o tamanho da fonte */
 
         }   
+        .naoquebra{
+            flex-wrap: nowrap;
+            display: flex;
+            background: #323430;
+            padding: 15px;
+
+        }
         
+        .naoquebra_botoes{
+            flex-wrap: nowrap;
+            display: flex;
+            background: #323430;
+            padding: 15px;
+
+        }        
         .custom-slider {
         /* appearance: none; */
         width: 50px !important;
@@ -243,12 +268,16 @@
                 padding: 5px; /* Reduz o espaçamento interno */
             }
             .bpm-display {
-                font-size: 1.1rem; /* Fonte grande para o BPM */
+                font-size: 1.9rem; /* Fonte grande para o BPM */
+               
             }  
             
             .controls {
-                gap: 0px; /* Espaçamento entre os elementos */
-                margin: 5px 0; /* Adiciona margens vertical */
+                background: #734e4e;
+                margin: 0px; /* Adiciona margens vertical */
+                padding: 10px;
+                flex-wrap: wrap;
+                gap: 10px;
                 
             }
             button {
@@ -261,9 +290,9 @@
   
             } 
             .button1 {
-                background: linear-gradient(-10deg, #000000 60%, #e4e2e88b ); /* Aplica gradiente no fundo */
-                color: white; /* Cor do texto branco */
-                padding: 1px; /* Espaçamento interno */
+                background: #5e626a;
+                color: rgb(211, 209, 212); /* Cor do texto branco */
+                padding: 0px; /* Espaçamento interno */
                 cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
                 transition: 0.3s; /* Adiciona transição suave ao hover */
                 border-radius: 15px;
@@ -412,13 +441,13 @@
         <!-- Controles -->
         <div class="bpm-display">bpm:  <span id="bpm1">120</span></div> <!-- Exibe o BPM atual -->
         
-        <div class="controls">
-            <button class="btn button1" data-change="1">+1</button> <!-- Botão para aumentar o BPM em +1 -->
-            <button class="btn button1" data-change="5">+5</button> <!-- Botão para aumentar o BPM em +5 -->
-            <button class="btn button1" data-change="10">+10</button> <!-- Botão para aumentar o BPM em +10 -->
+        <div class="naoquebra_botoes">
             <button class="btn button1" data-change="-1">-1</button> <!-- Botão para diminuir o BPM em -1 -->
             <button class="btn button1" data-change="-5">-5</button> <!-- Botão para diminuir o BPM em -5 -->
             <button class="btn button1" data-change="-10">-10</button> <!-- Botão para diminuir o BPM em -10 -->
+            <button class="btn button1" data-change="1">+1</button> <!-- Botão para aumentar o BPM em +1 -->
+            <button class="btn button1" data-change="5">+5</button> <!-- Botão para aumentar o BPM em +5 -->
+            <button class="btn button1" data-change="10">+10</button> <!-- Botão para aumentar o BPM em +10 -->
         </div>
     <!-- Insira o JavaScript aqui -->
 
@@ -436,7 +465,7 @@
         <!-- </div> --> 
         
         <!-- Configurações -->
-        <div class="settings">
+        <div class="controls">
             <div class="range-wrapper">
                 <label for="volume">Vol (<span id="volumeValue">10</span>)</label> <!-- Exibe o valor do volume -->
                 <input type="range" id="volume" value="10" min="0" max="100"> <!-- Slider -->
@@ -452,7 +481,7 @@
         
         
         <!-- Configurações de tempo -->
-        <div class="tempo-settings">
+        <div class="controls">
             <div class="range-wrapper">
                 <label>Início (<span class="slider-value">135</span>)</label> <!-- Meta de BPM -->              
                 <input type="range" class="custom-slider" value="120" min="40" max="300">
@@ -473,14 +502,14 @@
         </div>
         
         <!-- Botões de controle -->
-        <div class="controls">
+        <div class="naoquebra">
             <button id="play-button" class="btn">▶</button> <!-- Botão de play -->
             <button id="pause-button" class="btn">⏸</button> <!-- Botão de pause -->
             <button id="stop-button" class="btn">⏹</button> <!-- Botão de stop -->
             <button id="save-button" class="btn">💾</button> <!-- Botão de salvar -->
         </div>
         
-        <div class='links'>
+        <div class='controls'>
             <a href="seu-destino-aqui" class='links'>Importar</a> <!-- Botão para importar -->
             <a href="seu-destino-aqui" class='links'>Exportar</a> <!-- Botão para exportar -->
             <a href="seu-destino-aqui" class='links'>Selecionar Planilha</a> <!-- Botão para selecionar a planilha -->

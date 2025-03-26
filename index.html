@@ -25,31 +25,37 @@
 
         /* Estiliza o container principal */
         .container {
-            width: 85%; /* Ocupar toda a largura disponível */
-            max-width: 800px; /* Limita a largura máxima a 800px */
-            margin: 20px auto; /* Centraliza horizontalmente e adiciona margem vertical */
-            padding: 20px; /* Adiciona espaçamento interno */
+            width: 95%; /* Ocupar toda a largura disponível */
+            max-width: 250px; /* Limita a largura máxima a 800px */
+            margin: 2px auto; /* Centraliza horizontalmente e adiciona margem vertical */
+            padding: 2px; /* Adiciona espaçamento interno */
             background: linear-gradient(to top, #000000, #0e0323); /* Aplica gradiente no fundo */
             border-radius: 18px; /* Adiciona bordas arredondadas */
             box-shadow: 0px 0px 50px rgb(61, 61, 94); /* Adiciona sombra ao container */
-            border: 5px solid #555f74; /* Define a borda externa */
+            border: 3px solid #555f74; /* Define a borda externa */
         }
         .links {
             display: flex; /* Usa Flexbox para layout */
-            justify-content: space-between; /* Espaçamento entre os itens */
+            justify-content: start; /* Espaçamento entre os itens */
             align-items: center; /*Centraliza verticalmente os itens
             /* margin-bottom: 20px; Adiciona espaçamento inferior */
             color: #7a818f;
             font-weight: bold;
+            flex-wrap: wrap;
+            gap: 5px;
         }
         /* Estiliza a exibição do BPM */
         .bpm-display {
-            background: #0d1237; /* Fundo escuro */
-            padding: 2px; /* Espaçamento interno */
+            display: flex;
+            background: #00000000; /* Fundo escuro */
+            padding: 0px; /* Espaçamento interno */
             border-radius: 15px; /* Bordas arredondadas */
-            border: 4px solid #4d6084; /* Borda azul */
-            font-size: 2.0rem; /* Fonte grande para o BPM */
-            width: 90%;
+            justify-content: center; /* Espaçamento entre os itens */
+            align-items: center; /* Centraliza verticalmente os itens */
+            /*border: 2px solid #4d6084; /* Borda azul */
+            font-size: 1.0rem; /* Fonte grande para o BPM */
+            font-weight: 900;
+            /* width: 90%; */
             white-space: nowrap; /* Impede quebra de linha */
             flex: 1; /* Permite que o BPM ocupe o espaço disponível */
         }
@@ -99,6 +105,25 @@
             border: 5px groove #867daa;
             
         }
+
+        .button1 {
+            background: linear-gradient(-10deg, #340303 40%, #e4e2e88b ); /* Aplica gradiente no fundo */
+            color: white; /* Cor do texto branco */
+            padding: 1px; /* Espaçamento interno */
+            cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
+            transition: 0.3s; /* Adiciona transição suave ao hover */
+            border-radius: 10px;
+            border: 1px groove #1d193000;
+            box-shadow: 0px 0px 3px rgba(24, 24, 163, 0.768); /* Adiciona sombra ao container */
+            /* width: 50%; */
+        }
+
+        /* Efeito hover nos botões */
+        .button1:hover {
+            background: linear-gradient(-10deg, #000000 20%, #e4e2e88b ); /* Aplica gradiente no fundo */
+            border: 5px groove #867daa;
+            
+        }        
 
         .linha{
             display: flex;
@@ -168,8 +193,8 @@
         }
         /* Botões nos controles com tamanho maior */
         .controls button {
-            font-size: 1.2rem; /* Aumenta o tamanho da fonte */
-            padding: 10px 15px; /* Ajusta o espaçamento interno */
+            font-size: 0.8rem; /* Aumenta o tamanho da fonte */
+            padding: 2px 2px; /* Ajusta o espaçamento interno */
         }
         input[type="checkbox"] {
         margin-left: 15px; /* Reduz o espaço à direita do checkbox */
@@ -215,7 +240,7 @@
                 padding: 5px; /* Reduz o espaçamento interno */
             }
             .bpm-display {
-                font-size: 1.8rem; /* Fonte grande para o BPM */
+                font-size: 1.1rem; /* Fonte grande para o BPM */
             }  
             
             .controls {
@@ -232,6 +257,17 @@
                 gap: 1px; /* Ajusta o espaço entre o label e o slider */
   
             } 
+            .button1 {
+                background: linear-gradient(-10deg, #000000 60%, #e4e2e88b ); /* Aplica gradiente no fundo */
+                color: white; /* Cor do texto branco */
+                padding: 1px; /* Espaçamento interno */
+                cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
+                transition: 0.3s; /* Adiciona transição suave ao hover */
+                border-radius: 15px;
+                /*border: 5px groove #6a6094;
+                box-shadow: 1px 5px 10px rgba(136, 136, 153, 0.459); /* Adiciona sombra ao container */
+                /* width: 50%; */
+            }            
                    
             
         }             
@@ -256,40 +292,41 @@
         });
     </script>
 
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let bpm = 34;
+            const bpmDisplay = document.getElementById("bpm");
+            const buttons = document.querySelectorAll(".btn");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const value = parseInt(this.innerText);
+                    bpm += value;
+                    bpmDisplay.innerText = bpm;
+                });
+            });
+        });
+    </script>
+
+
 </head>
 <body>
     <!-- Corpo da página -->
     <div class="container">
         <!-- Cabeçalho -->
-        <header class='links'>
-            <a href="seu-destino-aqui" class='links'>Importar</a> <!-- Botão para importar -->
-            <a href="seu-destino-aqui" class='links'>Exportar</a> <!-- Botão para exportar -->
-            <a href="seu-destino-aqui" class='links'>Selecionar Planilha</a> <!-- Botão para selecionar a planilha -->
-            <div class="range-wrapper">
-                <label for= "tempoestudo">Tempo de estudo (<span id="tempoEstudoValue">10</span> min) </label> <!-- Input para o tempo de estudo -->
-                <input type="range" id="tempoEstudo" value="30" min="0" max="180">
-            <div>
-            <script>
-                // Captura o slider e o elemento que exibe o valor
-                const tempoEstudoSlider = document.getElementById("tempoEstudo");
-                const tempoEstudoValue = document.getElementById("tempoEstudoValue");
-        
-                // Adiciona um evento para atualizar o valor dinamicamente
-                tempoEstudoSlider.addEventListener("input", function () {
-                    tempoEstudoValue.textContent = tempoEstudoSlider.value; // Atualiza o texto com o valor atual do slider
-                });
-            </script>                
-        </header>
+
         
         <!-- Controles -->
+        <div class="bpm-display">bpm:  <span id="bpm1">120</span></div> <!-- Exibe o BPM atual -->
+        
         <div class="controls">
-            <button class="btn" data-change="1">+1</button> <!-- Botão para aumentar o BPM em +1 -->
-            <button class="btn" data-change="5">+5</button> <!-- Botão para aumentar o BPM em +5 -->
-            <button class="btn" data-change="10">+10</button> <!-- Botão para aumentar o BPM em +10 -->
-            <div class="bpm-display">bpm: <span id="bpm1">120</span></div> <!-- Exibe o BPM atual -->
-            <button class="btn" data-change="-1">-1</button> <!-- Botão para diminuir o BPM em -1 -->
-            <button class="btn" data-change="-5">-5</button> <!-- Botão para diminuir o BPM em -5 -->
-            <button class="btn" data-change="-10">-10</button> <!-- Botão para diminuir o BPM em -10 -->
+            <button class="btn button1" data-change="1">+1</button> <!-- Botão para aumentar o BPM em +1 -->
+            <button class="btn button1" data-change="5">+5</button> <!-- Botão para aumentar o BPM em +5 -->
+            <button class="btn button1" data-change="10">+10</button> <!-- Botão para aumentar o BPM em +10 -->
+            <button class="btn button1" data-change="-1">-1</button> <!-- Botão para diminuir o BPM em -1 -->
+            <button class="btn button1" data-change="-5">-5</button> <!-- Botão para diminuir o BPM em -5 -->
+            <button class="btn button1" data-change="-10">-10</button> <!-- Botão para diminuir o BPM em -10 -->
         </div>
     <!-- Insira o JavaScript aqui -->
         <script>        
@@ -369,6 +406,10 @@
             
         </script>          
         
+
+
+
+        
         <!-- Lista de tarefas -->
         <div class="task-list">
             <select>
@@ -423,22 +464,27 @@
             <button id="save-button" class="btn">💾</button> <!-- Botão de salvar -->
         </div>
         
-    </div>
+        <div class='links'>
+            <a href="seu-destino-aqui" class='links'>Importar</a> <!-- Botão para importar -->
+            <a href="seu-destino-aqui" class='links'>Exportar</a> <!-- Botão para exportar -->
+            <a href="seu-destino-aqui" class='links'>Selecionar Planilha</a> <!-- Botão para selecionar a planilha -->
+            <!-- <div class="range-wrapper"> -->
+            <label for= "tempoestudo">Tempo de estudo (<span id="tempoEstudoValue">10</span> min) </label> <!-- Input para o tempo de estudo -->
+            <input type="range" id="tempoEstudo" value="30" min="0" max="180">
+            <!-- <div> -->
+            <script>
+                // Captura o slider e o elemento que exibe o valor
+                const tempoEstudoSlider = document.getElementById("tempoEstudo");
+                const tempoEstudoValue = document.getElementById("tempoEstudoValue");
     
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let bpm = 34;
-            const bpmDisplay = document.getElementById("bpm");
-            const buttons = document.querySelectorAll(".btn");
-
-            buttons.forEach(button => {
-                button.addEventListener("click", function () {
-                    const value = parseInt(this.innerText);
-                    bpm += value;
-                    bpmDisplay.innerText = bpm;
+                // Adiciona um evento para atualizar o valor dinamicamente
+                tempoEstudoSlider.addEventListener("input", function () {
+                    tempoEstudoValue.textContent = tempoEstudoSlider.value; // Atualiza o texto com o valor atual do slider
                 });
-            });
-        });
-    </script>
+            </script>                
+        </div>
+    </div>
+
+
 </body>
 </html>

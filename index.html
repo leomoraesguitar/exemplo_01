@@ -102,7 +102,7 @@
         /* Efeito hover nos botões */
         button:hover {
             background: linear-gradient(-10deg, #000000 20%, #e4e2e88b ); /* Aplica gradiente no fundo */
-            border: 5px groove #867daa;
+            /*border: 5px groove #867daa;*/
             
         }
 
@@ -121,7 +121,7 @@
         /* Efeito hover nos botões */
         .button1:hover {
             background: linear-gradient(-10deg, #000000 20%, #e4e2e88b ); /* Aplica gradiente no fundo */
-            border: 5px groove #867daa;
+            /*border: 5px groove #867daa;*/
             
         }        
 
@@ -312,6 +312,95 @@
     </script>
 
 
+    <script>        
+        document.addEventListener("DOMContentLoaded", function () {
+            const bpmDisplay = document.getElementById("bpm1"); // Captura o valor do BPM
+            const volumeSlider = document.getElementById("volume"); // Slider para ajustar o volume
+            const volumeValueDisplay = document.getElementById("volumeValue"); // Exibe o valor do volume
+            const buttons = document.querySelectorAll(".btn"); // Botões para ajustar o BPM
+            const playButton = document.getElementById("play-button"); // Botão de Play
+            const stopButton = document.getElementById("stop-button"); // Botão de Stop
+
+            let currentBPM = parseInt(bpmDisplay.textContent, 10); // Converte o BPM inicial para número
+            let currentVolume = parseFloat(volumeSlider.value) / 100; // Converte o valor do slider para proporção (0-1)
+            let metronomeInterval;
+            let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            // Valida o BPM inicial
+            if (isNaN(currentBPM) || currentBPM < 40 || currentBPM > 300) {
+                currentBPM = 40; // Define valor padrão se for inválido
+                bpmDisplay.textContent = currentBPM;
+            }
+
+            // Atualiza o BPM ao clicar nos botões
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const change = parseInt(this.getAttribute("data-change"), 10); // Incremento ou decremento
+                    if (!isNaN(change)) {
+                        currentBPM = Math.min(Math.max(currentBPM + change, 40), 300); // Limita entre 40 e 300 BPM
+                        bpmDisplay.textContent = currentBPM; // Atualiza a exibição
+                        if (metronomeInterval) {
+                            updateMetronome(); // Reinicia o metronomo se estiver tocando
+                        }
+                    }
+                });
+            });
+
+            // Atualiza o volume ao mover o slider
+            volumeSlider.addEventListener("input", function () {
+                currentVolume = parseFloat(volumeSlider.value) / 100; // Converte o valor do slider para proporção (0-1)
+                volumeValueDisplay.textContent = volumeSlider.value; // Atualiza o valor exibido no HTML
+            });
+
+            // Função para tocar o metronomo
+            function playMetronome() {
+                if (isNaN(currentBPM) || currentBPM < 40 || currentBPM > 300) {
+                    alert("BPM inválido! Certifique-se de que está entre 40 e 300.");
+                    return;
+                }
+
+                updateMetronome(); // Inicia o metronomo com o valor atual do BPM
+            }
+
+            // Reinicia o intervalo do metronomo com o BPM atual
+            function updateMetronome() {
+                const interval = 60000 / currentBPM; // Calcula o intervalo com base no BPM
+                clearInterval(metronomeInterval); // Limpa o intervalo anterior
+
+                metronomeInterval = setInterval(() => {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+
+                    oscillator.type = "square"; // Define o tipo de som
+                    oscillator.frequency.setValueAtTime(900, audioContext.currentTime); // Frequência do clique
+                    gainNode.gain.setValueAtTime(currentVolume, audioContext.currentTime); // Ajusta o volume baseado no slider
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.008); // Duração do som
+                }, interval);
+            }
+
+            // Função para parar o metronomo
+            function stopMetronome() {
+                clearInterval(metronomeInterval); // Para o som
+                metronomeInterval = null; // Reseta a variável para controle
+            }
+
+            // Eventos dos botões
+            playButton.addEventListener("click", playMetronome);
+            stopButton.addEventListener("click", stopMetronome);
+        });
+        
+
+
+
+    </script>          
+
+
+
 </head>
 <body>
     <!-- Corpo da página -->
@@ -331,83 +420,7 @@
             <button class="btn button1" data-change="-10">-10</button> <!-- Botão para diminuir o BPM em -10 -->
         </div>
     <!-- Insira o JavaScript aqui -->
-        <script>        
-                document.addEventListener("DOMContentLoaded", function () {
-                const bpmDisplay = document.getElementById("bpm1"); // Captura o valor do BPM
-                const buttons = document.querySelectorAll(".btn"); // Botões para ajustar o BPM
-                const playButton = document.getElementById("play-button"); // Botão de Play
-                const stopButton = document.getElementById("stop-button"); // Botão de Stop
 
-                let currentBPM = parseInt(bpmDisplay.textContent, 10); // Converte o BPM inicial para número
-                let metronomeInterval;
-                let audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-                // Valida o BPM inicial
-                if (isNaN(currentBPM) || currentBPM < 40 || currentBPM > 300) {
-                    currentBPM = 40; // Define valor padrão se for inválido
-                    bpmDisplay.textContent = currentBPM;
-                }
-
-                // Atualiza o BPM ao clicar nos botões
-                buttons.forEach(button => {
-                    button.addEventListener("click", function () {
-                        const change = parseInt(this.getAttribute("data-change"), 10); // Incremento ou decremento
-                        if (!isNaN(change)) {
-                            currentBPM = Math.min(Math.max(currentBPM + change, 40), 300); // Limita entre 40 e 300 BPM
-                            bpmDisplay.textContent = currentBPM; // Atualiza a exibição
-                            if (metronomeInterval) {
-                                updateMetronome(); // Reinicia o metronomo se estiver tocando
-                            }
-                        }
-                    });
-                });
-
-                // Função para tocar o metronomo
-                function playMetronome() {
-                    if (isNaN(currentBPM) || currentBPM < 40 || currentBPM > 300) {
-                        alert("BPM inválido! Certifique-se de que está entre 40 e 300.");
-                        return;
-                    }
-
-                    updateMetronome(); // Inicia o metronomo com o valor atual do BPM
-                }
-
-                // Reinicia o intervalo do metronomo com o BPM atual
-                function updateMetronome() {
-                    const interval = 60000 / currentBPM; // Calcula o intervalo com base no BPM
-                    clearInterval(metronomeInterval); // Limpa o intervalo anterior
-
-                    metronomeInterval = setInterval(() => {
-                        const oscillator = audioContext.createOscillator();
-                        const gainNode = audioContext.createGain();
-
-                        oscillator.type = "square"; // Define o tipo de som
-                        oscillator.frequency.setValueAtTime(900, audioContext.currentTime); // Frequência do clique
-                        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime); // Volume ajustado
-
-                        oscillator.connect(gainNode);
-                        gainNode.connect(audioContext.destination);
-
-                        oscillator.start(audioContext.currentTime);
-                        oscillator.stop(audioContext.currentTime + 0.008); // Duração do som
-                    }, interval);
-                }
-
-                // Função para parar o metronomo
-                function stopMetronome() {
-                    clearInterval(metronomeInterval); // Para o som
-                    metronomeInterval = null; // Reseta a variável para controle
-                }
-
-                // Eventos dos botões
-                playButton.addEventListener("click", playMetronome);
-                stopButton.addEventListener("click", stopMetronome);
-            });
-
-            
-            
-        </script>          
-        
 
 
 

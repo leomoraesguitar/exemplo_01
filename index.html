@@ -98,7 +98,7 @@
             cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
             transition: 0.3s; /* Adiciona transição suave ao hover */
             border-radius: 8px;
-            border: 0px groove #545454;
+            border: 0px solid #a0a0a0;
             /*box-shadow: 1px 5px 10px rgba(136, 136, 153, 0.459); /* Adiciona sombra ao container */
             width: 50%;
             min-height: 40px;
@@ -198,10 +198,10 @@
         }        
         .range-wrapper {
             display: flex; /* Usa layout flex para alinhar horizontalmente */
-            align-items:flex-start; /* Centraliza verticalmente o texto e o slider */
+            align-items:stretch; /* Centraliza verticalmente o texto e o slider */
             gap: 3px; /* Ajusta o espaço entre o label e o slider */
             flex-wrap: nowrap;
-            justify-content:left;
+            justify-content:stretch;
             
         }
         /* Botões nos controles com tamanho maior */
@@ -285,11 +285,7 @@
                 padding: 0px; /* Espaçamento interno */
                 width: 50%;
             }            
-            .range-wrapper {
 
-                gap: 1px; /* Ajusta o espaço entre o label e o slider */
-  
-            } 
             .button1 {
           
                 color: rgb(211, 209, 212); /* Cor do texto branco */

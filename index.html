@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Define o tipo de documento como HTML5 -->
+    <meta charset="UTF-8">
+    <!-- Define o conjunto de caracteres como UTF-8 para suportar diferentes idiomas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configura a exibição responsiva com base na largura da tela -->
+    <title>Metronome UI</title>
+    <!-- Define o título da página -->
+
+    <style>
+        /* Estiliza o corpo da página */
+        body {
+            background-color: #0a0a0a; /* Define o fundo preto */
+            color: white; /* Define a cor do texto como branco */
+            font-family: Arial, sans-serif; /* Define a fonte do texto */
+            display: flex; /* Usa Flexbox para o layout */
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: flex-start; /* Alinha ao topo verticalmente */
+            min-height: 100vh; /* Define altura mínima igual à altura da janela */
+            margin: 0; /* Remove as margens padrão */
+            padding-top: 20px; /* Adiciona um espaçamento superior */
+        }
+
+        /* Estiliza o container principal */
+        .container {
+            width: 85%; /* Ocupar toda a largura disponível */
+            max-width: 800px; /* Limita a largura máxima a 800px */
+            margin: 20px auto; /* Centraliza horizontalmente e adiciona margem vertical */
+            padding: 20px; /* Adiciona espaçamento interno */
+            background: linear-gradient(to top, #000000, #0e0323); /* Aplica gradiente no fundo */
+            border-radius: 18px; /* Adiciona bordas arredondadas */
+            box-shadow: 0px 0px 50px rgb(61, 61, 94); /* Adiciona sombra ao container */
+            border: 5px solid #555f74; /* Define a borda externa */
+        }
+        .links {
+            display: flex; /* Usa Flexbox para layout */
+            justify-content: space-between; /* Espaçamento entre os itens */
+            align-items: center; /*Centraliza verticalmente os itens
+            /* margin-bottom: 20px; Adiciona espaçamento inferior */
+            color: #7a818f;
+            font-weight: bold;
+        }
+        /* Estiliza a exibição do BPM */
+        .bpm-display {
+            background: #0d1237; /* Fundo escuro */
+            padding: 2px; /* Espaçamento interno */
+            border-radius: 15px; /* Bordas arredondadas */
+            border: 4px solid #4d6084; /* Borda azul */
+            font-size: 2.0rem; /* Fonte grande para o BPM */
+            width: 90%;
+            white-space: nowrap; /* Impede quebra de linha */
+            flex: 1; /* Permite que o BPM ocupe o espaço disponível */
+        }
+        /* Estilização responsiva para telas menores */
+        /* Estiliza os controles */
+        .controls {
+            background: linear-gradient(0deg, #000000 70%, #e4e2e854 ); /* Aplica gradiente no fundo */
+            display: flex; /* Usa Flexbox para layout */
+            justify-content: center; /* Centraliza horizontalmente os elementos */
+            align-items: center; /* Centraliza verticalmente os elementos */
+            gap: 5px; /* Espaçamento entre os elementos */
+            margin: 10px 0; /* Adiciona margens vertical */
+            /* border-radius: 58px; Adiciona bordas arredondadas */
+            border-radius: 15px;
+            border: 4px groove #6a6094;
+            box-shadow: 1px 5px 19px rgba(22, 22, 209, 0.917); /* Adiciona sombra ao container */
+            /* flex-wrap: wrap; Permite que os itens quebrem para uma nova linha */
+        }
+
+        
+
+
+        /* Estiliza o cabeçalho */
+        header {
+            display: flex; /* Usa Flexbox para layout */
+            justify-content: space-between; /* Espaçamento entre os itens */
+            align-items: center; /* Centraliza verticalmente os itens */
+            margin-bottom: 20px; /* Adiciona espaçamento inferior */
+        }
+
+        /* Estiliza os botões */
+        button {
+            background: linear-gradient(-10deg, #000000 60%, #e4e2e88b ); /* Aplica gradiente no fundo */
+            color: white; /* Cor do texto branco */
+            padding: 10px; /* Espaçamento interno */
+            cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
+            transition: 0.3s; /* Adiciona transição suave ao hover */
+            border-radius: 15px;
+            border: 5px groove #6a6094;
+            box-shadow: 1px 5px 10px rgba(136, 136, 153, 0.459); /* Adiciona sombra ao container */
+            width: 50%;
+        }
+
+        /* Efeito hover nos botões */
+        button:hover {
+            background: linear-gradient(-10deg, #000000 20%, #e4e2e88b ); /* Aplica gradiente no fundo */
+            border: 5px groove #867daa;
+            
+        }
+
+        .linha{
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+
+        /* Estilização para listas de tarefas, configurações e ajustes de tempo */
+        .task-list, .settings, .tempo-settings {
+            margin-top: 10px; /* Margem superior */
+            border: 5px groove #23314e; /* Borda azul */
+            display: flex; 
+            gap: 5px; 
+            flex-wrap: wrap;
+            /* justify-content: space-between; */
+
+            background: linear-gradient(0deg, #000000 80%, #e4e2e85e ); /* Aplica gradiente no fundo */
+            color: white; /* Cor do texto branco */
+            padding: 10px 5px 10px 5px; /* Espaçamento interno */
+            cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
+            transition: 0.3s; /* Adiciona transição suave ao hover */
+            border-radius: 15px;
+            border: 4px groove #6a6094;
+            box-shadow: 1px 5px 10px rgba(136, 136, 153, 0.459); /* Adiciona sombra ao container */
+
+        }
+
+        /* Estilização para inputs e selects */
+        input, select {
+            background: #222; /* Fundo escuro */
+            color: white; /* Cor do texto branco */
+            border: 1px ridge #0055ff; /* Borda azul */
+            padding: 5px; /* Espaçamento interno */
+            border-radius: 5px; /* Bordas arredondadas */
+        }
+
+        /* Estilização para inputs do tipo range */
+        input[type="range"] {
+            width: 80px; /* Define a largura do controle */
+            height: 1px; /* Define a altura do controle (opcional) */
+            /* appearance: none; Remove o estilo padrão do navegador */
+            background: #363239; /* Cor de fundo da barra */
+            border-radius: 15px; /* Bordas arredondadas na barra */
+        }
+        /* Estilo para o "thumb" (botão deslizante) */
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none; /* Remove o estilo padrão */
+            width: 15px; /* Define a largura do "thumb" */
+            height: 15px; /* Define a altura do "thumb" */
+            background: #0055ff; /* Cor do "thumb" */
+            align-items: center;
+            border-radius: 50%; /* Torna o "thumb" circular */
+            /* cursor: pointer; Define o cursor como clicável */
+        }
+        .controls-wrapper {
+            display: flex; /* Aplica layout flexível para os controles */
+            align-items: center; /* Centraliza os elementos verticalmente */
+            gap: 10px; /* Adiciona espaço entre os controles */
+        }        
+        .range-wrapper {
+            display: flex; /* Usa layout flex para alinhar horizontalmente */
+            align-items:flex-start; /* Centraliza verticalmente o texto e o slider */
+            gap: 3px; /* Ajusta o espaço entre o label e o slider */
+            flex-wrap: nowrap;
+            justify-content:left;
+            
+        }
+        /* Botões nos controles com tamanho maior */
+        .controls button {
+            font-size: 1.2rem; /* Aumenta o tamanho da fonte */
+            padding: 10px 15px; /* Ajusta o espaçamento interno */
+        }
+        input[type="checkbox"] {
+        margin-left: 15px; /* Reduz o espaço à direita do checkbox */
+        margin-right: 0px; /* Reduz o espaço à esquerda do checkbox */
+        }
+
+        label {
+            margin: 0; /* Remove margens desnecessárias */
+            white-space: nowrap; /* Impede quebra de linha */
+        }   
+        
+        .custom-slider {
+        /* appearance: none; */
+        width: 50px !important;
+        height: 10px;
+        background: linear-gradient(to right, #0055ff, #e4e2e8);
+        border-radius: 5px;
+        outline: none;
+        /* cursor: pointer; */
+        }
+
+        .custom-slider::-webkit-slider-thumb {
+            /* appearance: none; */
+            width: 5px;
+            height: 20px;
+            background: #0055ff;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .custom-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #0055ff;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            /* cursor: pointer; */
+        }   
+        @media (max-width: 800px) {
+            .container {
+                padding: 5px; /* Reduz o espaçamento interno */
+            }
+            .bpm-display {
+                font-size: 1.8rem; /* Fonte grande para o BPM */
+            }  
+            
+            .controls {
+                gap: 0px; /* Espaçamento entre os elementos */
+                margin: 5px 0; /* Adiciona margens vertical */
+                
+            }
+            button {
+                padding: 0px; /* Espaçamento interno */
+                width: 50%;
+            }            
+            .range-wrapper {
+
+                gap: 1px; /* Ajusta o espaço entre o label e o slider */
+  
+            } 
+                   
+            
+        }             
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Seleciona todos os sliders na página
+            const sliders = document.querySelectorAll(".custom-slider, #volume");
+
+            sliders.forEach(slider => {
+                // Captura o <span> correspondente ao slider dentro da mesma div
+                const valueDisplay = slider.closest('.range-wrapper').querySelector('span');
+
+                // Adiciona o evento para atualizar o valor do <span> correspondente
+                slider.addEventListener("input", function () {
+                    if (valueDisplay) {
+                        valueDisplay.textContent = slider.value; // Atualiza o valor no <span>
+                    }
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <!-- Corpo da página -->
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class='links'>
+            <a href="seu-destino-aqui" class='links'>Importar</a> <!-- Botão para importar -->
+            <a href="seu-destino-aqui" class='links'>Exportar</a> <!-- Botão para exportar -->
+            <a href="seu-destino-aqui" class='links'>Selecionar Planilha</a> <!-- Botão para selecionar a planilha -->
+            <div class="range-wrapper">
+                <label for= "tempoestudo">Tempo de estudo (<span id="tempoEstudoValue">10</span> min) </label> <!-- Input para o tempo de estudo -->
+                <input type="range" id="tempoEstudo" value="30" min="0" max="180">
+            <div>
+            <script>
+                // Captura o slider e o elemento que exibe o valor
+                const tempoEstudoSlider = document.getElementById("tempoEstudo");
+                const tempoEstudoValue = document.getElementById("tempoEstudoValue");
+        
+                // Adiciona um evento para atualizar o valor dinamicamente
+                tempoEstudoSlider.addEventListener("input", function () {
+                    tempoEstudoValue.textContent = tempoEstudoSlider.value; // Atualiza o texto com o valor atual do slider
+                });
+            </script>                
+        </header>
+        
+        <!-- Controles -->
+        <div class="controls">
+            <button class="btn" data-change="1">+1</button> <!-- Botão para aumentar o BPM em +1 -->
+            <button class="btn" data-change="5">+5</button> <!-- Botão para aumentar o BPM em +5 -->
+            <button class="btn" data-change="10">+10</button> <!-- Botão para aumentar o BPM em +10 -->
+            <div class="bpm-display">bpm: <span id="bpm1">120</span></div> <!-- Exibe o BPM atual -->
+            <button class="btn" data-change="-1">-1</button> <!-- Botão para diminuir o BPM em -1 -->
+            <button class="btn" data-change="-5">-5</button> <!-- Botão para diminuir o BPM em -5 -->
+            <button class="btn" data-change="-10">-10</button> <!-- Botão para diminuir o BPM em -10 -->
+        </div>
+    <!-- Insira o JavaScript aqui -->
+        <script>        
+                document.addEventListener("DOMContentLoaded", function () {
+                const bpmDisplay = document.getElementById("bpm1"); // Captura o valor do BPM
+                const buttons = document.querySelectorAll(".btn"); // Botões para ajustar o BPM
+                const playButton = document.getElementById("play-button"); // Botão de Play
+                const stopButton = document.getElementById("stop-button"); // Botão de Stop
+
+                let currentBPM = parseInt(bpmDisplay.textContent, 10); // Converte o BPM inicial para número
+                let metronomeInterval;
+                let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+                // Valida o BPM inicial
+                if (isNaN(currentBPM) || currentBPM < 40 || currentBPM > 300) {
+                    currentBPM = 40; // Define valor padrão se for inválido
+                    bpmDisplay.textContent = currentBPM;
+                }
+
+                // Atualiza o BPM ao clicar nos botões
+                buttons.forEach(button => {
+                    button.addEventListener("click", function () {
+                        const change = parseInt(this.getAttribute("data-change"), 10); // Incremento ou decremento
+                        if (!isNaN(change)) {
+                            currentBPM = Math.min(Math.max(currentBPM + change, 40), 300); // Limita entre 40 e 300 BPM
+                            bpmDisplay.textContent = currentBPM; // Atualiza a exibição
+                            if (metronomeInterval) {
+                                updateMetronome(); // Reinicia o metronomo se estiver tocando
+                            }
+                        }
+                    });
+                });
+
+                // Função para tocar o metronomo
+                function playMetronome() {
+                    if (isNaN(currentBPM) || currentBPM < 40 || currentBPM > 300) {
+                        alert("BPM inválido! Certifique-se de que está entre 40 e 300.");
+                        return;
+                    }
+
+                    updateMetronome(); // Inicia o metronomo com o valor atual do BPM
+                }
+
+                // Reinicia o intervalo do metronomo com o BPM atual
+                function updateMetronome() {
+                    const interval = 60000 / currentBPM; // Calcula o intervalo com base no BPM
+                    clearInterval(metronomeInterval); // Limpa o intervalo anterior
+
+                    metronomeInterval = setInterval(() => {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+
+                        oscillator.type = "square"; // Define o tipo de som
+                        oscillator.frequency.setValueAtTime(900, audioContext.currentTime); // Frequência do clique
+                        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime); // Volume ajustado
+
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + 0.008); // Duração do som
+                    }, interval);
+                }
+
+                // Função para parar o metronomo
+                function stopMetronome() {
+                    clearInterval(metronomeInterval); // Para o som
+                    metronomeInterval = null; // Reseta a variável para controle
+                }
+
+                // Eventos dos botões
+                playButton.addEventListener("click", playMetronome);
+                stopButton.addEventListener("click", stopMetronome);
+            });
+
+            
+            
+        </script>          
+        
+        <!-- Lista de tarefas -->
+        <div class="task-list">
+            <select>
+                <option>Padrão</option> <!-- Exemplo de seleção -->
+            </select>
+            <input type="text" placeholder="nome da nova lista de tarefas"> <!-- Input para adicionar nova lista -->
+            <button>Add.</button> <!-- Botão para adicionar tarefa -->
+        </div>
+        
+        <!-- Configurações -->
+        <div class="settings">
+            <div class="range-wrapper">
+                <label for="volume">Vol (<span id="volumeValue">10</span>)</label> <!-- Exibe o valor do volume -->
+                <input type="range" id="volume" value="10" min="0" max="100"> <!-- Slider -->
+            </div>
+        
+            <input type="checkbox" id="invert">
+            <label for="invert">Inverter</label>
+            <input type="checkbox" id="train" checked>
+            <label for="train">Treino Habilitado</label>
+        
+
+        </div>
+        
+        
+        <!-- Configurações de tempo -->
+        <div class="tempo-settings">
+            <div class="range-wrapper">
+                <label>Início (<span class="slider-value">135</span>)</label> <!-- Meta de BPM -->              
+                <input type="range" class="custom-slider" value="120" min="40" max="300">
+            </div>  
+            <div class="range-wrapper">
+                <label>Meta (<span class="slider-value">10</span>)</label> <!-- Meta de BPM -->              
+                <input type="range" class="custom-slider" value="10" min="0" max="100">
+            </div>       
+            <div class="range-wrapper">
+                <label>Passo (<span class="slider-value">1</span>)</label> <!-- Meta de BPM -->              
+                <input type="range" class="custom-slider" step="0.1" value="1" min="0" max="1">
+            </div>  
+            <div class="range-wrapper">
+                <label>Passo_fim (<span class="slider-value">0</span>)</label> <!-- Meta de BPM -->              
+                <input type="range" class="custom-slider" step="0.1" value="0" min="0" max="1">
+            </div>                                           
+
+        </div>
+        
+        <!-- Botões de controle -->
+        <div class="controls">
+            <button id="play-button" class="btn">▶</button> <!-- Botão de play -->
+            <button id="pause-button" class="btn">⏸</button> <!-- Botão de pause -->
+            <button id="stop-button" class="btn">⏹</button> <!-- Botão de stop -->
+            <button id="save-button" class="btn">💾</button> <!-- Botão de salvar -->
+        </div>
+        
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let bpm = 34;
+            const bpmDisplay = document.getElementById("bpm");
+            const buttons = document.querySelectorAll(".btn");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const value = parseInt(this.innerText);
+                    bpm += value;
+                    bpmDisplay.innerText = bpm;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

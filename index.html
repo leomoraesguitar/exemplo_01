@@ -53,8 +53,8 @@
             border-radius: 0px; /* Bordas arredondadas */
             justify-content: center; /* Espaçamento entre os itens */
             align-items: center; /* Centraliza verticalmente os itens */
-            /*border: 2px solid #4d6084; /* Borda azul */
-            font-size: 4.0rem; /* Fonte grande para o BPM */
+            /*border: 2px outset #000000; /* Borda azul */
+            font-size: 6.0rem; /* Fonte grande para o BPM */
             font-weight: 900;
             /* width: 90%; */
             white-space: nowrap; /* Impede quebra de linha */
@@ -64,7 +64,7 @@
         /* Estiliza os controles */
         .controls {
             /*background: linear-gradient(0deg, #000000 70%, #e4e2e854 ); /* Aplica gradiente no fundo */
-            background: #734e4e;            
+            background: #406140;            
             display: flex; /* Usa Flexbox para layout */
             justify-content: center; /* Centraliza horizontalmente os elementos */
             align-items: center; /* Centraliza verticalmente os elementos */
@@ -98,12 +98,13 @@
             cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
             transition: 0.3s; /* Adiciona transição suave ao hover */
             border-radius: 8px;
-            border: 0px solid #a0a0a0;
+            border: 1px outset #000000;
             /*box-shadow: 1px 5px 10px rgba(136, 136, 153, 0.459); /* Adiciona sombra ao container */
             width: 50%;
             min-height: 40px;
             margin-right: 5px;
             margin-left: 5px;
+            font-size: 1.2rem;
             
         }
 
@@ -121,7 +122,7 @@
             cursor: pointer; /* Mostra o cursor como "mão" ao passar o mouse */
             transition: 0.3s; /* Adiciona transição suave ao hover */
             border-radius: 5px;
-            border: 0px groove #1d193000;
+            border: 3px outset #000000;
             /*box-shadow: 0px 0px 3px rgba(24, 24, 163, 0.768); /* Adiciona sombra ao container */
             /* width: 50%; */
             margin: 5px;
@@ -270,7 +271,7 @@
                 padding: 5px; /* Reduz o espaçamento interno */
             }
             .bpm-display {
-                font-size: 2.9rem; /* Fonte grande para o BPM */
+                font-size: 3.9rem; /* Fonte grande para o BPM */
                 
             }  
             
@@ -299,7 +300,9 @@
             }            
                    
             
-        }             
+        }
+        
+        
     </style>
 
     <script>
@@ -432,7 +435,6 @@
 <body>
     <!-- Corpo da página -->
     <div class="container">
-        <!-- Cabeçalho -->
 
         
         <!-- Controles -->

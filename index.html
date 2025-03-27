@@ -205,12 +205,12 @@
             gap: 10px; /* Adiciona espaço entre os controles */
         }        
         .range-wrapper {
+            width: 200px;
             display: flex; /* Usa layout flex para alinhar horizontalmente */
             align-items:stretch; /* Centraliza verticalmente o texto e o slider */
             gap: 3px; /* Ajusta o espaço entre o label e o slider */
             flex-wrap: nowrap;
             justify-content:stretch;
-            width: 200px;
             
         }
 
@@ -259,6 +259,9 @@
         }
  
         @media (max-width: 800px) {
+            .range-wrapper {
+                width: 80%;
+            }            
             .custom-slider {
                 /* appearance: none; */
                 width: 100% !important;

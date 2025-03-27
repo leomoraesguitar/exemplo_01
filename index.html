@@ -192,6 +192,13 @@
             border-radius: 50%; /* Torna o "thumb" circular */
             /* cursor: pointer; Define o cursor como clicável */
         }
+        input[type="checkbox"] {
+            width: 20px;  /* Largura do checkbox */
+            height: 20px; /* Altura do checkbox */
+            /*transform: scale(1.5); /* Escala maior */
+            cursor: pointer; /* Torna o cursor uma mão ao passar por cima */
+            
+        }        
         .controls-wrapper {
             display: flex; /* Aplica layout flexível para os controles */
             align-items: center; /* Centraliza os elementos verticalmente */
@@ -205,6 +212,7 @@
             justify-content:stretch;
             
         }
+
         /* Botões nos controles com tamanho maior */
         .controls button {
             font-size: 0.8rem; /* Aumenta o tamanho da fonte */
@@ -466,13 +474,13 @@
         <!-- Configurações -->
         <div class="controls">
             <div class="range-wrapper">
-                <label for="volume">Vol (<span id="volumeValue">10</span>)</label> <!-- Exibe o valor do volume -->
-                <input type="range" id="volume" value="10" min="0" max="100"> <!-- Slider -->
+                <label for="volume">Vol (<span id="volumeValue">50</span>)</label> <!-- Exibe o valor do volume -->
+                <input type="range" id="volume" value="50" min="0" max="100"> <!-- Slider -->
             </div>
         
             <input type="checkbox" id="invert">
             <label for="invert">Inverter</label>
-            <input type="checkbox" id="train" checked>
+            <input type="checkbox" id="train" >
             <label for="train">Treino Habilitado</label>
         
 
